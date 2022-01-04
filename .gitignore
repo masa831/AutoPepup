@@ -131,8 +131,9 @@ dmypy.json
 # 参考用フォルダを除外
 origin_Sakagami/
 
-# exeファイルを除外
+# 不要なファイルを除外
 *.exe
+*.json
 
 # 個人情報記載ファイルを除外
 app/src/private_parameter.py

@@ -31,7 +31,7 @@ class DateGenerator:
         
         # 日時リストを取得
         date_dict = {
-            'Month': date.strftime('%Y/%m'),
+            'Month': date.strftime('%Y/%m').replace('/0','/'),
             'Datelist': []
         }
 
@@ -61,10 +61,10 @@ class DateGenerator:
 
         return date_dict
 
-    def generate_week_date_list(self, date):
-        """generate_week_date_list (method)
+    def generate_20day_date_list(self, date):
+        """generate_20day_date_list (method)
 
-        週のDate情報を生成するメソッド。
+        20日分のDate情報を生成するメソッド。
         指定日時の週の日付リストを作成する。
         指定日時より未来の日にちは、day_existをFalseとして辞書に格納する。
 
@@ -76,8 +76,8 @@ class DateGenerator:
                 月の情報(Month)と、各日日付の情報(Datalist)を格納した辞書。
         """
         # 時刻を取得
-        #curr_date = datetime.datetime(date.year, date.month, 1)
-        curr_date = datetime.datetime.now() - datetime.timedelta(days = 10)
+        curr_date_ = datetime.datetime(date.year, date.month, 1)
+        curr_date = datetime.datetime.now() - datetime.timedelta(days = 20)
         # 日時リストを取得
         date_dict = {
             'Month': date.strftime('%Y/%m'),
@@ -138,5 +138,28 @@ class DateGenerator:
             prev_date_dict = self.generate_month_date_list(prev_date)
             #prev_date_dict = self.generate_week_date_list(prev_date)
             date_list.append(prev_date_dict)
+
+        return date_list
+
+    def generate_date_list_20d(self):
+        """generate_date_list_20d (method)
+
+        マイレージ内の日付ボタン押下用のDate情報を用意するメソッド。
+
+        Returns:
+            list of dict:
+                実施日から20日前までの日付情報をまとめた配列。
+                配列の要素は、月の情報(Month)と各日付の情報(Datalist)を格納した辞書が格納される。
+                各日付の情報(Datalist)は、['Date', 'Week', 'Day']をキーと持つ辞書のリスト。
+        """
+        # 現在の時刻を取得
+        now_date = datetime.datetime.now()
+        # 昨日の日時を取得　→　こっちを基準にする
+        dt_yesterday = now_date - datetime.timedelta(days = 1)
+        # 本月の日程を取得
+        date_list = []
+        # curr_date_dict = self.generate_month_date_list(dt_yesterday)
+        curr_date_dict = self.generate_20day_date_list(now_date)
+        date_list.append(curr_date_dict)
 
         return date_list

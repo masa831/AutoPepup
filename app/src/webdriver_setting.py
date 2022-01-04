@@ -52,6 +52,7 @@ def create_webdriver(param={'is_prod_env': False, 'is_browser_hidden': False}):
         is_browser_hidden = param.get('is_browser_hidden')
         if (is_browser_hidden is not None) and (is_browser_hidden is True):
             options.add_argument('--headless')
+            options.add_experimental_option('excludeSwitches', ['enable-logging']) #コンソールに出てくる余計なメッセージを消去
 
     # Create web driver
     driver = webdriver.Chrome(executable_path=executable_path, options=options)

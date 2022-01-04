@@ -14,6 +14,7 @@ from app.src.private_parameter import PrivateParameter
 #日時を取得
 date = DateGenerator()
 date_list = date.generate_date_list()
+datelist = date.generate_date_list_20d()
 
 # 実行開始
 # インスタンス作成
@@ -24,7 +25,7 @@ privateInfo = PrivateParameter()
 # ウェブドライバー設定
 # ブラウザ非表示
 mileage.webdriver = create_webdriver(param={'is_prod_env': False, 'is_browser_hidden': True})
-# ブラウザ表示
+# ブラウザ表示 debug用
 # mileage.webdriver = create_webdriver(param={'is_prod_env': False, 'is_browser_hidden': False})
 # mileage.webdriver = webdriver.Chrome('chromedriver')
 
