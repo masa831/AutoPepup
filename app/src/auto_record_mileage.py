@@ -100,13 +100,15 @@ class AutoRecordMileage:
                 # 日付ボタンをクリック
                 wf.click_day(self.webdriver, mileage_id, week_id, day_id)
 
-                # 歩数入力が8000以下の場合はテキストボックスの入力値をリセット
-                if( (mileage_name == 'StepInput') and int(wf.get_textbox(self.webdriver)) < 8000 ):
-                    wf.reset_textbox(self.webdriver)
-            
-                # 睡眠時間が6以下の場合はテキストボックスの入力値をリセット
-                if( (mileage_name == 'SleepInput') and float(wf.get_textbox(self.webdriver)) < 6.0 ):
-                    wf.reset_textbox(self.webdriver)
+                # すでにPepupに入力が入っている場合:歩数と睡眠時間が一定値を超えているかを確認
+                if (wf.get_textbox(self.webdriver) != ''):
+                    # 歩数入力が8000以下の場合はテキストボックスの入力値をリセット
+                    if( (mileage_name == 'StepInput') and int(wf.get_textbox(self.webdriver)) < 8000 ):
+                        wf.reset_textbox(self.webdriver)
+                
+                    # 睡眠時間が6以下の場合はテキストボックスの入力値をリセット
+                    if( (mileage_name == 'SleepInput') and float(wf.get_textbox(self.webdriver)) < 6.0 ):
+                        wf.reset_textbox(self.webdriver)
             
                 #  現在の入力がない場合、入力値を生成して入力
                 if (wf.get_textbox(self.webdriver) == ''):
