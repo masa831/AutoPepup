@@ -1,7 +1,9 @@
 # autoPepup
 
 ## 履歴
+
 ***
+
 ### 2022/01/04 プログラムが異常終了する現象に遭遇
 
 原因：webdriver_function.pyの103行目の'elect_element.select_by_value(pulldown)'の
@@ -17,6 +19,20 @@ date_generator.py 34行目を変更
 追加変更：webdriver_setting.py 55行目を変更  
 コンソールに出てくる余計なメッセージを消去。  
 ただし、重要なエラーメッセージも非表示される可能性もあるため、要注意  
-[add] options.add_experimental_option('excludeSwitches', ['enable-logging']) 
 
+以下を追加
 
+```python
+options.add_experimental_option('excludeSwitches', ['enable-logging']) 
+```
+
+### chromedriverのバージョンについて
+
+conda install -c conda-forge python-chromedriver-binary=98.0.4758.80
+
+オプション -c conda-forge は有償のパッケージ以外も対象にしてくれる
+
+### conda pip の違い
+
+参考URL
+`https://yurufuwadiary.com/conda-or-pip`
