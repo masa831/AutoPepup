@@ -47,3 +47,14 @@ conda search -c conda-forge python-chromedriver-binary=107*
 <https://chromedriver.chromium.org/downloads>
 ※ただし、現状ではなぜかchrome-binaryでないと動かない可能性あり
 webdriver.xxのメソッドが読み込めていない様子
+
+### Pyreverse & graphviz
+
+<https://makutsueeken5.hatenablog.com/entry/2019/02/13/145049>
+
+<https://progzakki.sanachan.com/program-lang/python/how-to-generate-image-of-class-structure/>
+
+<https://qiita.com/kenichi-hamaguchi/items/c0b947ed15725bfdfb5a>
+
+webdriver_function.pyのL22の判定がおかしい
+auto_record_mileage.pyのL55でTrueで実行すべき処理を飛ばしている、、

@@ -49,11 +49,14 @@ class AutoRecordMileage:
                                  '\n'
                                  '　また、「私はロボットではありません」のチェックボックスは突破できません\n'
                                  '　チェックボックスが出ている際は、一度手動でのチェックをお願いします')
-                common.error_log.add_error_log(error_message)
+                # common.error_log.add_error_log(error_message)
 
         # ログイン成功時はわくわくマイレージにアクセス
-        if wf.check_login_success(self.webdriver):
-            wf.access_mileage_url(self.webdriver)
+        # if wf.check_login_success(self.webdriver):
+        #     wf.access_mileage_url(self.webdriver)
+        
+        # 2022/10/30 一時的なバグ対応　上記ロジックが動いていない、、if文がTrueで入るはずが入ってない
+        wf.access_mileage_url(self.webdriver)
 
     def record_value(self, date_list, mileage_name, mileage_id, generator):
         """record_value (method)
