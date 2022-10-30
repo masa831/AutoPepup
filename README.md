@@ -28,11 +28,22 @@ options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
 ### chromedriverのバージョンについて
 
+以下のコマンドでバージョンアップロードする
 conda install -c conda-forge python-chromedriver-binary=98.0.4758.80
+conda install -c conda-forge python-chromedriver-binary=107.0.5304.88
+※オプション -c conda-forge は有償のパッケージ以外も対象にしてくれる
 
-オプション -c conda-forge は有償のパッケージ以外も対象にしてくれる
+以下のコマンドでバージョンを検索する
+conda search -c conda-forge python-chromedriver-binary=107*
 
 ### conda pip の違い
 
 参考URL
-`https://yurufuwadiary.com/conda-or-pip`
+<https://yurufuwadiary.com/conda-or-pip>
+
+### chromedriverについて
+
+適宜バージョンは更新する必要あり
+<https://chromedriver.chromium.org/downloads>
+※ただし、現状ではなぜかchrome-binaryでないと動かない可能性あり
+webdriver.xxのメソッドが読み込めていない様子

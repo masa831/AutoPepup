@@ -5,6 +5,5 @@ rem 画面をクリア
 cls
 rem pythonスクリプトを実行
 python C:\Users\zeroc\work\autoPepup\main.py
-rem 実行するpythonスクリプトファイル"hello.py"はフルパスで指定します。
 rem 実行はウインドウは開いたままにする
 pause
