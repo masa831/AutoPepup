@@ -44,7 +44,7 @@ class WebdriverParameter:
     MILLAGE_URL = "https://pepup.life/scsk_mileage_campaigns"
 
     # ログインページのコンテンツ名(=ページタイトル)
-    HOME_CONTENT_TEXT = "Pep Up（ペップアップ）"
+    HOME_CONTENT_TEXT = "ホーム - Pep Up(ペップアップ)"
 
     LOGIN_EMAIL_XPATH = "//input[@name='user[email]']"
     LOGIN_PASS_XPATH = "//input[@name='user[password]']"

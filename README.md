@@ -26,6 +26,16 @@ date_generator.py 34行目を変更
 options.add_experimental_option('excludeSwitches', ['enable-logging']) 
 ```
 
+### 20221105
+
+URLの変更により、不具合が発生
+auto_record_mileage.pyの以下の処理が意図通りの動きではない
+if wf.check_login_success(self.webdriver):
+
+下記変更により、バグは解消
+HOME_CONTENT_TEXT = "Pep Up（ペップアップ）"
+→HOME_CONTENT_TEXT = "ホーム - Pep Up(ペップアップ)"
+
 ### chromedriverのバージョンについて
 
 以下のコマンドでバージョンアップロードする
