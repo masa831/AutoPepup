@@ -1,13 +1,6 @@
 from datetime import datetime
-
 from app.src.webdriver_setting import create_webdriver
-from app.src.parse_event_message import ParseEventMessage
-from app.src.date_generator import DateGenerator
-from app.src.random_generator import RandomGenerator
 from app.src import webdriver_function as wf
-from app.src.parameter import AutoRecordMileageParameter as Param
-
-from app.src import common_variables as common
 
 
 class AutoRecordMileage:
@@ -16,13 +9,11 @@ class AutoRecordMileage:
     わくわくマイレージ自動入力を取りまとめるクラス。
 
     Attributes
-        parse_message (ParseEventMessage): イベントメッセージをParseするクラスインスタンス。
         webdriver (selenium.driver): webドライバ。
 
     """
 
     def __init__(self):
-        self.parse_message = ParseEventMessage()
         self.webdriver = None
 
     def login_pepup(self, address, password):
@@ -42,14 +33,7 @@ class AutoRecordMileage:
 
             # ログイン実施 & ログイン成功/失敗判定
             if not wf.run_login(self.webdriver, address, password):
-                error_message = ('\n'
-                                 '■ログイン情報\n'
-                                 '　Pepupへのログインに失敗しました\n'
-                                 '　メールアドレス、パスワードに誤りがあるかもしれません\n'
-                                 '\n'
-                                 '　また、「私はロボットではありません」のチェックボックスは突破できません\n'
-                                 '　チェックボックスが出ている際は、一度手動でのチェックをお願いします')
-                # common.error_log.add_error_log(error_message)
+                print('[Error]failed login')
 
         # ログイン成功時はわくわくマイレージにアクセス
         if wf.check_login_success(self.webdriver):
@@ -220,101 +204,3 @@ class AutoRecordMileage:
 
         return result_logs
 
-    def auto_record(self, event_message, app_param):
-        """auto_record (method)
-
-        わくわくマイレージ自動入力を実施するメソッド。
-
-        Args:
-            event_message (string):
-                Lineのチャットで送信されたメッセージ。
-            app_param (dict):
-                開発環境とブラウザ表示の設定。
-                ・'is_prod_env'
-                    True : AWS Lambdaで動かすための設定を行う
-                    False: ローカル環境で動かすための設定を行う
-                ・'is_browser_hidden'
-                    True : ブラウザの表示設定を非表示にする
-                    False: ブラウザの表示設定を表示にする
-                    ('is_prod_env'がTrueの場合は、強制的にFalseになる)
-
-        Returns:
-            string: 自動入力実施の結果ログ
-        """
-        # 入力のParse処理
-        message = self.parse_message.parse_event_message(event_message)
-        if common.error_log.error_flg:
-            return common.error_log.pop_error_message()
-
-        # ドライバと自動入力処理クラスのを用意
-        self.webdriver = create_webdriver(param=app_param)
-
-        # ログイン処理
-        common.line_msg.push_message('PepupLogin Process Now')
-        self.login_pepup(message.address, message.password)
-        if common.error_log.error_flg:
-            return False, common.error_log.pop_error_message()
-
-        # マイレージ内の日付ボタン押下用のDate情報を用意
-        date_generator = DateGenerator()
-        date_list = date_generator.generate_date_list()
-
-        # メッセージ格納リスト
-        ack_results = []
-
-        # 各種マイレージの入力を実施
-        for mileage_type in Param.MILEAGE_TYPE_LIST:
-
-            # 歩数の自動入力
-            if (mileage_type['Type'] == 'step') and message.is_step:
-                mileage_name = mileage_type['Name']
-                mileage_id = mileage_type['Id']
-                common.line_msg.push_message(mileage_name + ' Process Now')
-
-                step_generator = RandomGenerator(message.step_min,
-                                                 message.step_max,
-                                                 1)
-                results = self.record_value(date_list,
-                                            mileage_name,
-                                            mileage_id,
-                                            step_generator)
-                if len(results) > 0:
-                    ack_results.append('')
-                ack_results.extend(results)
-
-            # 睡眠時間の自動入力
-            elif (mileage_type['Type'] == 'sleep') and message.is_sleep:
-                mileage_name = mileage_type['Name']
-                mileage_id = mileage_type['Id']
-                common.line_msg.push_message(mileage_name + ' Process Now')
-
-                sleep_generator = RandomGenerator(message.sleep_min,
-                                                  message.sleep_max,
-                                                  0.1)
-                results = self.record_value(date_list,
-                                            mileage_name,
-                                            mileage_id,
-                                            sleep_generator)
-                if len(results) > 0:
-                    ack_results.append('')
-                ack_results.extend(results)
-
-            # 各種チェックボックスの自動入力
-            elif (mileage_type['Type'] == 'check') and message.is_check:
-                mileage_name = mileage_type['Name']
-                mileage_id = mileage_type['Id']
-                common.line_msg.push_message(mileage_name + ' Process Now')
-
-                results = self.record_checkbox(date_list,
-                                               mileage_name,
-                                               mileage_id)
-                if len(results) > 0:
-                    ack_results.append('')
-                ack_results.extend(results)
-
-        # ブラウザを閉じる
-        self.webdriver.quit()
-
-        # 取得した結果ログを文字列に変換して返却
-        ack_message = '\n'.join(ack_results)
-        return ack_message

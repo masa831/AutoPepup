@@ -36,6 +36,8 @@ if wf.check_login_success(self.webdriver):
 HOME_CONTENT_TEXT = "Pep Up（ペップアップ）"
 →HOME_CONTENT_TEXT = "ホーム - Pep Up(ペップアップ)"
 
++α　不要なファイルや処理を整理
+
 ### chromedriverのバージョンについて
 
 以下のコマンドでバージョンアップロードする
@@ -56,7 +58,6 @@ conda search -c conda-forge python-chromedriver-binary=107*
 適宜バージョンは更新する必要あり
 <https://chromedriver.chromium.org/downloads>
 ※ただし、現状ではなぜかchrome-binaryでないと動かない可能性あり
-webdriver.xxのメソッドが読み込めていない様子
 
 ### Pyreverse & graphviz
 
@@ -65,6 +66,3 @@ webdriver.xxのメソッドが読み込めていない様子
 <https://progzakki.sanachan.com/program-lang/python/how-to-generate-image-of-class-structure/>
 
 <https://qiita.com/kenichi-hamaguchi/items/c0b947ed15725bfdfb5a>
-
-webdriver_function.pyのL22の判定がおかしい
-auto_record_mileage.pyのL55でTrueで実行すべき処理を飛ばしている、、
