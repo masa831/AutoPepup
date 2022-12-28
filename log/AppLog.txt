@@ -1,0 +1,3 @@
+[start process]
+歩数を入力中....
+Execution time is 29.29[s]
