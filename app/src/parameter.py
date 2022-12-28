@@ -14,6 +14,21 @@ class AutoRecordMileageParameter:
         {'Name': 'OtherCheck',   'Type': 'check', 'Id': 9}      # その他のチェック
     ]
 
+class AutoValueParameter:
+    """AutoValueParameter (parameter)
+
+    歩数、睡眠時間を自動入力するときのパラメータ
+
+    """
+    STEPTIME_SLEEP = 0.1
+    LOWLIMIT_SLEEP = 6.9
+    HIGHLIMIT_SLEEP = 8.0
+
+    STEPTIME_WALK = 1
+    LOWLIMIT_WALK = 10000
+    HIGHLIMIT_WALK = 12000
+
+
 
 class DateGeneratorParameter:
     """DateGeneratorParameter (parameter)

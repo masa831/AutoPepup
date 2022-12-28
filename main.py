@@ -1,10 +1,10 @@
 import time
 from app.src.auto_record_mileage import AutoRecordMileage
 from app.src.date_generator import DateGenerator
-from app.src.parameter import AutoRecordMileageParameter
 from app.src.random_generator import RandomGenerator
 from app.src.webdriver_setting import create_webdriver
 from app.src.private_parameter import PrivateParameter
+from app.src.parameter import AutoRecordMileageParameter,AutoValueParameter
 
 #日時を取得
 date = DateGenerator()
@@ -16,6 +16,7 @@ datelist = date.generate_date_list_20d()
 mileage = AutoRecordMileage()
 typelist = AutoRecordMileageParameter()
 privateInfo = PrivateParameter()
+ValueParam = AutoValueParameter()
 
 start = time.time()
 
@@ -30,8 +31,17 @@ print('[start process]')
 mileage.login_pepup(privateInfo.MY_MAIL_ADDRESS,privateInfo.LOGIN_PASS)
 
 # 歩数、睡眠時間入力用乱数設定
-val_step_random = RandomGenerator(10000,11000,1)
-val_sleep_random = RandomGenerator(7.0,7.5,0.1) #固定値入力に対応していない可能性あり
+# val_step_random = RandomGenerator(10000,12000,1)
+# val_sleep_random = RandomGenerator(6.9,8.1,0.1) #固定値入力に対応していない可能性あり
+
+val_step_random = RandomGenerator(AutoValueParameter.LOWLIMIT_WALK,
+                                AutoValueParameter.HIGHLIMIT_WALK,
+                                AutoValueParameter.STEPTIME_WALK)
+
+val_sleep_random = RandomGenerator(AutoValueParameter.LOWLIMIT_SLEEP,
+                                AutoValueParameter.HIGHLIMIT_SLEEP,
+                                AutoValueParameter.STEPTIME_SLEEP)
+
 
 # 自動入力
 try:

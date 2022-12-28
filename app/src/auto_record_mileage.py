@@ -1,6 +1,7 @@
 from datetime import datetime
 from app.src.webdriver_setting import create_webdriver
 from app.src import webdriver_function as wf
+from app.src.parameter import AutoValueParameter
 
 
 class AutoRecordMileage:
@@ -87,10 +88,14 @@ class AutoRecordMileage:
                 # すでにPepupに入力が入っている場合:歩数と睡眠時間が一定値を超えているかを確認
                 if (wf.get_textbox(self.webdriver) != ''):
                     # 歩数入力が8000以下の場合はテキストボックスの入力値をリセット
+                    # if( (mileage_name == 'StepInput') and int(wf.get_textbox(self.webdriver)) < 8000 ):
+                    #     wf.reset_textbox(self.webdriver)
                     if( (mileage_name == 'StepInput') and int(wf.get_textbox(self.webdriver)) < 8000 ):
                         wf.reset_textbox(self.webdriver)
                 
                     # 睡眠時間が6以下の場合はテキストボックスの入力値をリセット
+                    # if( (mileage_name == 'SleepInput') and float(wf.get_textbox(self.webdriver)) < 6.0 ):
+                    #     wf.reset_textbox(self.webdriver)
                     if( (mileage_name == 'SleepInput') and float(wf.get_textbox(self.webdriver)) < 6.0 ):
                         wf.reset_textbox(self.webdriver)
             
