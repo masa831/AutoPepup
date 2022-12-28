@@ -48,6 +48,8 @@ conda install -c conda-forge python-chromedriver-binary=107.0.5304.88
 以下のコマンドでバージョンを検索する
 conda search -c conda-forge python-chromedriver-binary=107*
 
+pip install chromedriver-binary==107.0.5304.62.0
+
 ### conda pip の違い
 
 参考URL
@@ -66,3 +68,7 @@ conda search -c conda-forge python-chromedriver-binary=107*
 <https://progzakki.sanachan.com/program-lang/python/how-to-generate-image-of-class-structure/>
 
 <https://qiita.com/kenichi-hamaguchi/items/c0b947ed15725bfdfb5a>
+
+### pyside6 sampleCode
+
+<https://rikoubou.hatenablog.com/entry/2022/04/29/115254>
