@@ -1,6 +1,10 @@
 # autoPepup
 
-## 履歴
+## 環境
+
+環境名：WsPepup
+
+## 変更履歴
 
 ***
 
@@ -72,3 +76,44 @@ pip install chromedriver-binary==107.0.5304.62.0
 ### pyside6 sampleCode
 
 <https://rikoubou.hatenablog.com/entry/2022/04/29/115254>
+
+### Pythonアプリ化Memo 20221230記
+
+GUI参考URL
+<https://qiita.com/nanako_ut/items/b5393363b9e21d6342ea#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E9%81%B8%E6%8A%9E>
+
+<https://maasaablog.com/development/backend/python/4279/>
+
+アプリ起動時　コンソール画面を非表示
+<https://genchan.net/it/programming/python/4183/>
+
+アプリ化
+<https://umano-ie.com/python-desktop-application/>
+
+コマンドメモ
+pyinstaller AutoPepup_gui.py -D -F -w --clean --icon=AutoPepup.ico  --name AutoPepup --hidden-import='C:\\Users\\zeroc\\anaconda3\\envs\\WsPepup\\lib\\site-packages\\PySide6' --debug all
+
+pyinstaller AutoPepup_gui.py -D -F --clean -i=AutoPepup.ico  --add-data='.\\log\\pepuplog.txt;\\log\\' --name AutoPepup --hidden-import='C:\\Users\\zeroc\\anaconda3\\envs\\WsPepup\\lib\\site-packages\\PySide6' --debug all
+
+pyinstaller AutoPepup_gui.py -D --clean -i=AutoPepup.ico --name AutoPepup --hidden-import='C:\\Users\\zeroc\\anaconda3\\envs\\WsPepup\\lib\\site-packages\\PySide6' --hidden-import='C:\\Users\\zeroc\\anaconda3\\envs\\WsPepup\\lib\\site-packages\\chromedriver_binary' --hidden-import='C:\\Users\\zeroc\\anaconda3\\envs\\WsPepup\\lib\\site-packages\\selenium' --debug all
+
+パッケージパス
+'C:\\Users\\zeroc\\anaconda3\\envs\\WsPepup\\lib\\site-packages\\chromedriver_binary'
+'C:\\Users\\zeroc\\anaconda3\\envs\\WsPepup\\lib\\site-packages\\PySide6'
+
+.specファイルに足すといいかも？
+a.datas += [('pepuplog.txt', '.\\log\\pepuplog.txt', 'DATA')]
+
+後で試したいこと
+webdriverについて、
+<https://teratail.com/questions/367515>
+-------------------------
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium import webdriver
+driver = webdriver.Chrome(ChromeDriverManager().install())
+-------------------------
+
+現状のエラー
+・logフォルダが含まれないため、エラー。手動で配置するとエラーは解消される
+・上記を解消後はchromedriverのエラーが出ている状態
+→chromedriver_binaryを指定してインポートするか、driverManagerを使用してみるか
