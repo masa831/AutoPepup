@@ -22,9 +22,9 @@ start = time.time()
 
 # ウェブドライバー設定
 # ブラウザ非表示
-mileage.webdriver = create_webdriver(param={'is_browser_hidden': True})
+# mileage.webdriver = create_webdriver(param={'is_browser_hidden': True})
 # ブラウザ表示 debug用
-# mileage.webdriver = create_webdriver(param={'is_browser_hidden': False})
+mileage.webdriver = create_webdriver(param={'is_browser_hidden': False})
 
 print('[start process]')
 # ログイン処理

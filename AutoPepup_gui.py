@@ -4,9 +4,6 @@ from copy import deepcopy
 from PySide6.QtWidgets import *
 from PySide6.QtCore import *
 from PySide6.QtGui import *
-# from pyside6.QtWidgets import *
-# from pyside6.QtCore import *
-# from pyside6.QtGui import *
 import main_GUI
 
 
@@ -58,7 +55,7 @@ class Form(QDialog):
         # ボタン部分(exit)
         exit_layout = QHBoxLayout()
         self.exit_button = QPushButton("exit")
-        self.exit_button.clicked.connect(self.cb_exit)
+        self.exit_button.clicked.connect(self.close)
         exit_layout.addWidget(QLabel(""), 2)
         exit_layout.addWidget(self.exit_button, 1)
         exit_layout.addWidget(QLabel(""), 2)
@@ -73,16 +70,10 @@ class Form(QDialog):
 
         # レイアウトを作成して各要素を配置
         layout = QVBoxLayout()
-        # layout.addLayout(num_layout)
-        # layout.addLayout(count_layout)
         layout.addLayout(init_layout)
-        # layout.addLayout(title_layout)
         layout.addLayout(self.text_layout)
         layout.addLayout(pb_layput)
-        # layout.addLayout(run_layout)
-        # layout.addLayout(exit_layout)
         layout.addLayout(menu_layout)
-
 
         # レイアウトを画面に設定
         self.setLayout(layout)
@@ -92,9 +83,6 @@ class Form(QDialog):
         self.lp.log_thread.connect(self.show_log)  # シグナルスロットの接続
         self.lp.finished.connect(self.show_result) # スレッドが終了した際の処理の接続
 
-    def cb_exit(self):
-        # exitBotton Callback function
-        sys.exit(app.exec())
 
     def run_log(self):
         # ログプロセスを実行する

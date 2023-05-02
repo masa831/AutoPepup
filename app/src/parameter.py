@@ -70,14 +70,14 @@ class WebdriverParameter:
     # ----------------------------------------------------------------------------------------------------
     # 月選択のプルダウン関連
     # ----------------------------------------------------------------------------------------------------
-    MONTH_SELECT_BOX_XPATH = ("//html/body/div[1]/div/div[2]/div/div[2]"
-                              "/div/div[3]/select")
+    MONTH_SELECT_BOX_XPATH = "/html/body/div[1]/div/div[2]/div/main/div/div[3]/select"
+
     MONTH_PULLDOWN_FORMAT = '/scsk_mileage_campaigns/{}'
 
     # ----------------------------------------------------------------------------------------------------
     # 日付ボタン
     # ----------------------------------------------------------------------------------------------------
-    DAY_BUTTON_XPATH_FORMAT = ("/html/body/div[1]/div/div[2]/div/div[2]"
+    DAY_BUTTON_XPATH_FORMAT = ("/html/body/div[1]/div/div[2]/div/main"
                                "/div/div[{}]/div[2]/div[1]/div[2]/div[2]"
                                "/div[{}]/div[{}]/button")
 
